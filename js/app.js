@@ -1,9 +1,12 @@
 /*
  * Create a list that holds all of your cards
  */
- let card = document.getElementsByClassName("card");
- let allCards = [...card];
+let card = document.getElementsByClassName("card");
+let allCards = [...card];
 let clickedCards = [];
+let move = 0;
+let timer = setInterval(startTimer, 1000);
+let totalSeconds = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -25,12 +28,13 @@ function shuffle(array) {
 
     return array;
 }
-
+startTimer();
 $(".card").click(function(card) {
   clickedCards.push(card)
   $(this).toggleClass("show open");
   if (clickedCards.length >= 2) {
-    countMoves();
+
+    moveCount();
     setTimeout(function() {
       clickedCards.forEach(function(card){
         $(".card").removeClass("show open notmatched");
@@ -45,8 +49,8 @@ $(".card").click(function(card) {
   }
   else {
   notMatched();
-
   }
+
   }
 })
 
@@ -62,15 +66,34 @@ function notMatched() {
     },1000);
 }
 
-function countMoves(){
-    moves++;
-    counter.innerHTML = moves;
+function moveCount() {
+  move++;
+document.getElementById("moves").innerHTML = move;
+
+if (move > 10) {
+ $(".one").remove();
+}
+if(move > 20) {
+  $(".two").remove();
+}
+if(move > 30) {
+  $(".three").remove();
+}
 }
 
 
 
+// Timer functionality
+// snippet from Stack Overflow https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
+function startTimer() {
+   totalSeconds++;
+   let hour = Math.floor(totalSeconds /3600);
+   let minute = Math.floor((totalSeconds - hour*3600)/60);
+   let seconds = totalSeconds - (hour*3600 + minute*60);
 
+   document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
