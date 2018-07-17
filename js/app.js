@@ -1,12 +1,29 @@
 /*
  * Create a list that holds all of your cards
  */
+
+
+ // A $( document ).ready() block.
+ $( document ).ready(function() {
+     $("#modalContent").hide();
+ });
+
+const deck = document.querySelector(".deck");
 let card = document.getElementsByClassName("card");
 let allCards = [...card];
 let clickedCards = [];
+let hour;
+let minute;
+let seconds;
 let move = 0;
 let timer = setInterval(startTimer, 1000);
 let totalSeconds = 0;
+let totalMatchedCards = 0;
+let modal = document.getElementById('myModal');
+let showTime= $("#timer");
+
+
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -46,6 +63,11 @@ $(".card").click(function(card) {
     $(clickedCards[0].currentTarget).toggleClass(" match");
     $(clickedCards[1].currentTarget).toggleClass(" match");
     clickedCards = [];
+    totalMatchedCards++;
+    console.log(totalMatchedCards);
+    checkPairs();
+
+//counter to see if matched
   }
   else {
   notMatched();
@@ -53,6 +75,13 @@ $(".card").click(function(card) {
 
   }
 })
+
+function checkPairs() {
+  if (totalMatchedCards === 1) {
+    congrats();
+  }
+}
+
 
 function notMatched() {
   $(clickedCards[0].currentTarget).addClass("notmatched");
@@ -70,13 +99,13 @@ function moveCount() {
   move++;
 document.getElementById("moves").innerHTML = move;
 
-if (move > 10) {
+if (move > 15) {
  $(".one").remove();
 }
-if(move > 20) {
-  $(".two").remove();
-}
 if(move > 30) {
+ let twoStars=  $(".two").remove();
+}
+if(move > 45) {
   $(".three").remove();
 }
 }
@@ -88,12 +117,74 @@ if(move > 30) {
 
 function startTimer() {
    totalSeconds++;
-   let hour = Math.floor(totalSeconds /3600);
-   let minute = Math.floor((totalSeconds - hour*3600)/60);
-   let seconds = totalSeconds - (hour*3600 + minute*60);
+    hour = Math.floor(totalSeconds /3600);
+    minute = Math.floor((totalSeconds - hour*3600)/60);
+    seconds = totalSeconds - (hour*3600 + minute*60);
 
    document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
 }
+
+function setTimer() {
+  timer= setInterval(function() {
+    time++
+  })
+}
+function stopTimer() {
+  clearInterval(timer);
+
+}
+//When a user wins the game, a modal appears to congratulate the player and ask if they want to play again. It should also tell the user how much time it took to win the game, and what the star rating was.
+
+function congrats() {
+  stopTimer();
+  openModal();
+}
+
+function openModal() {
+      modal.style.display = "block";
+      $(".score").append(`<p> It took you ${move} moves</p>`);
+      $(".time").append(`<p> to complete in ${minute} minutes and ${seconds} seconds`)
+      if (move < 15) {
+       $(".ranking").append(`<li><i class="one fa fa-star"></i></li>
+       <li><i class="two fa fa-star"></i></li>
+       <li><i class="three fa fa-star"></i></li>`);
+      }
+      if(move > 15) {
+        $(".ranking").append(`<li><i class="one fa fa-star"></i></li>
+        <li><i class="two fa fa-star"></i></li>`);
+      }
+      if(move > 45) {
+        $(".ranking").append(`<li><i class="one fa fa-star"></i></li>`)
+      ;
+      }
+
+      $("#startOver").on("click", function() {
+                 closeModal();
+                 shuffle(allCards);
+                 startGame();
+
+       })
+     }
+
+
+function closeModal()  {
+    modal.style.display = "none";
+}
+
+
+
+
+function startGame(){
+   let shuffledCards = shuffle(allCards);
+   for (var i= 0; i < shuffledCards.length; i++){
+      [].forEach.call(shuffledCards, function(item){
+         deck.appendChild(item);
+      });
+   }
+}
+window.onload = startGame();
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
