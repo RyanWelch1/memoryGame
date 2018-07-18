@@ -46,6 +46,7 @@ function shuffle(array) {
 
     return array;
 }
+
 startTimer();
 $(".card").click(function(card) {
   clickedCards.push(card)
@@ -159,31 +160,32 @@ function openModal() {
       ;
       }
 
-      $("#startOver").on("click", function() {
-                 closeModal();
 
-                 startGame();
-
-       })
      }
+refreshGame();
 
+function refreshGame() {
+  $("#startOver").on("click", function() {
+                  closeModal();
+                  location.reload();
+                  startGame();
+        })
+}
 
 function closeModal()  {
     modal.style.display = "none";
 }
 
 
-
-
 function startGame(){
    let shuffledCards = shuffle(allCards);
    for (var i= 0; i < shuffledCards.length; i++){
-      allCards.forEach.call(shuffledCards, function(item){
+      [].forEach.call(shuffledCards, function(item){
          deck.appendChild(item);
+
       });
    }
 }
-window.onload = startGame();
 
 
 
