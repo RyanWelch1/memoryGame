@@ -78,7 +78,7 @@ $(".card").click(function(card) {
 })
 
 function checkPairs() {
-  if (totalMatchedCards === 1) {
+  if (totalMatchedCards === 8) {
     congrats();
   }
 }
