@@ -6,6 +6,7 @@
  // A $( document ).ready() block.
  $( document ).ready(function() {
      $("#modalContent").hide();
+     window.onload = startGame();
  });
 
 const deck = document.querySelector(".deck");
@@ -68,10 +69,10 @@ $(".card").click(function(card) {
     checkPairs();
 
 //counter to see if matched
-  }
-  else {
-  notMatched();
-  }
+     }
+    else {
+    notMatched();
+    }
 
   }
 })
@@ -160,7 +161,7 @@ function openModal() {
 
       $("#startOver").on("click", function() {
                  closeModal();
-                 shuffle(allCards);
+
                  startGame();
 
        })
@@ -177,7 +178,7 @@ function closeModal()  {
 function startGame(){
    let shuffledCards = shuffle(allCards);
    for (var i= 0; i < shuffledCards.length; i++){
-      [].forEach.call(shuffledCards, function(item){
+      allCards.forEach.call(shuffledCards, function(item){
          deck.appendChild(item);
       });
    }
