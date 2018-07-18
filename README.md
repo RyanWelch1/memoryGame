@@ -1,20 +1,22 @@
 # Memory Game Project
 
 ## Table of Contents
+_* summary_
+_* [Instructions](#instructions)_
+_* [Contributing](#contributing)_
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## Summary
 
-## Instructions
+The Memory Game starts off with deck of cards laid out in a random order. The player will need to find the other match for the card to make a pair. Once 8 pairs are matched, the player will have won.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## instructions
 
-To get started, open `js/app.js` and start building out the app's functionality
+All of the files can be found in the repo below: You can fork it and make edits as needed. All the classes in the HTML were used to style as well as used for JQuery Selectors.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+This repository can be found here: _https://github.com/RyanWelch1/memoryGame_
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
