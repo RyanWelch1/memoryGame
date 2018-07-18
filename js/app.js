@@ -87,7 +87,7 @@ function notMatched() {
 //counter to check how many matched pairs so it prompts modal
 
 function checkPairs() {
-  if (totalMatchedCards === 1) {
+  if (totalMatchedCards === 8) {
     congrats();
   }
 }
