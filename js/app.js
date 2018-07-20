@@ -172,7 +172,7 @@ function closeModal()  {
     modal.style.display = "none";
 }
 
-
+//snippet from https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript
 function startGame(){
    let shuffledCards = shuffle(allCards);
    for (var i= 0; i < shuffledCards.length; i++){
